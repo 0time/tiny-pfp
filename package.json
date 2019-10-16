@@ -1,0 +1,17 @@
+{
+  "name": "tiny-pfp",
+  "version": "0.1.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "bluebird": "^3.7.1",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "eslint": "^6.5.1",
+    "eslint-config-prettier": "^6.4.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "lint-staged": "^9.4.2",
+    "mocha": "^6.2.1",
+    "prettier": "^1.18.2"
+  }
+}
