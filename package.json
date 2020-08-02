@@ -7,7 +7,7 @@
     "lint": "eslint .",
     "run-coveralls": "NODE_ENV=unit nyc report --reporter=text-lcov | coveralls",
     "test": "yarn lint && yarn test:unit && yarn test:coveralls && yarn test:integration",
-    "test:coveralls": "if-env-run CI run-coveralls",
+    "test:coveralls": "if-env-run CI yarn run-coveralls",
     "test:integration": "export NODE_ENV=integration && nyc mocha && nyc check-coverage",
     "test:unit": "NODE_ENV=unit nyc mocha"
   },
