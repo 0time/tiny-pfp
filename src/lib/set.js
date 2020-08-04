@@ -12,7 +12,7 @@ module.exports = (obj, bigKey, val) => {
     if (i === keys.length - 1) {
       curr[key] = val;
     } else {
-      if (!Object.prototype.hasOwnProperty.call(obj, key)) {
+      if (!Object.prototype.hasOwnProperty.call(curr, key)) {
         curr[key] = {};
       }
     }

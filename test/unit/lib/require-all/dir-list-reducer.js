@@ -4,7 +4,7 @@ const me = __filename;
 
 d(me, () => {
   describe('given a normal require', () => {
-    const listFiles = tquire(me);
+    const dirListReducer = tquire(me);
 
     describe('dirListReducer', () => {
       const emptyAcc = { directories: [], files: [] };
@@ -39,10 +39,7 @@ d(me, () => {
 
       it('should reduce files to files and dirs to dirs', () =>
         expect(
-          readdirResult.reduce(
-            listFiles.dirListReducer('.', setsOfStats),
-            emptyAcc,
-          ),
+          readdirResult.reduce(dirListReducer('.', setsOfStats), emptyAcc),
         ).to.deep.equal({
           directories: ['./test3', './test4', './test6'],
           files: ['./test1', './test2', './test5'],

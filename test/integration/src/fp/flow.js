@@ -2,12 +2,61 @@ const {
   bluebird,
   d,
   expect,
+  path,
   sinon,
   sinon: { stub },
   tquire,
 } = deps;
 
-d(__filename, () => {
+const me = path.relative(process.cwd(), __filename);
+const { fp } = require('../../../../src');
+
+d(me, () => {
+  const inc = x => x + 1;
+
+  describe('given an incrementing function and a flow with multiple calls to that', () => {
+    it('should increment each time', () => {
+      expect(fp.flow([inc, inc, inc])(1)).to.equal(4);
+    });
+  });
+
+  describe('given something akin to lodash/fp.set', () => {
+    it('set should be able to set multiple fields on an arg', () =>
+      expect(
+        fp.flow([fp.set('a.b', 'a.b'), fp.set('c.d', 'c.d')])({}),
+      ).to.deep.equal({
+        a: {
+          b: 'a.b',
+        },
+        c: {
+          d: 'c.d',
+        },
+      }));
+  });
+
+  describe('given one function which uses a promise', () => {
+    const theFlow = fp.flow([
+      fp.set('a.b', 'a.b'),
+      obj => new Promise(resolve => resolve(fp.set('c.d', 'c.d', obj))),
+      fp.set('e.f', 'e.f'),
+    ]);
+
+    it('should still chain them', () =>
+      theFlow({}).then(result =>
+        expect(result).to.deep.equal({
+          a: {
+            b: 'a.b',
+          },
+          c: {
+            d: 'c.d',
+          },
+          e: {
+            f: 'e.f',
+          },
+        }),
+      ));
+  });
+
   const bluebirdResolution = Symbol();
   const nativeResolution = Symbol();
 

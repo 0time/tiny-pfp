@@ -9,6 +9,7 @@ d(__filename, () => {
 
   describe('given a non-string key', () => {
     const key = Symbol();
+
     describe('given an empty obj reference', () => {
       beforeEach(() => {
         obj = null;
@@ -84,11 +85,13 @@ d(__filename, () => {
     let key = null;
     let key1 = null;
     let key2 = null;
+    let key3 = null;
 
     beforeEach(() => {
       key1 = uuid();
       key2 = uuid();
-      key = `${key1}.${key2}`;
+      key3 = uuid();
+      key = `${key1}.${key2}.${key3}`;
     });
 
     describe('given an empty obj reference', () => {
@@ -146,6 +149,32 @@ d(__filename, () => {
           });
         });
       });
+    });
+  });
+
+  describe('given a repeated key', () => {
+    let key1 = null;
+    let key = null;
+
+    beforeEach(() => {
+      key1 = uuid();
+      key = `${key1}.${key1}.${key1}`;
+    });
+
+    describe('and an empty object', () => {
+      let obj = null;
+
+      beforeEach(() => {
+        obj = {};
+      });
+
+      it('should not throw', () =>
+        expect(() => set(obj, key, val)).to.not.throw());
+
+      it('should return the object with that key set to the value', () =>
+        expect(set(obj, key, val)).to.deep.equal({
+          [key1]: { [key1]: { [key1]: val } },
+        }));
     });
   });
 });
