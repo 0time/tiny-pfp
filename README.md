@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/0time/tiny-pfp.svg?branch=master)](https://travis-ci.org/0time/tiny-pfp)
+[![Coverage Status](https://coveralls.io/repos/github/0time/tiny-pfp/badge.svg?branch=master)](https://coveralls.io/github/0time/tiny-pfp?branch=master)
+
 # tiny-pfp
 
 A lightweight alternative to lodash.
