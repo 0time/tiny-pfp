@@ -1,8 +1,9 @@
 {
   "name": "@0ti.me/tiny-pfp",
-  "version": "0.1.4",
-  "main": "index.js",
+  "version": "0.1.5",
+  "description": "A tiny, minimalist lodash alternative library",
   "license": "GPL-3.0",
+  "main": "src/index.js",
   "scripts": {
     "lint": "eslint .",
     "run-coveralls": "NODE_ENV=unit nyc report --reporter=text-lcov | coveralls",
