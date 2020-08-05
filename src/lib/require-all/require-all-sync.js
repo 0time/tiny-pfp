@@ -8,6 +8,6 @@ const requireAllFileReducer = require('./require-all-file-reducer');
 module.exports = dir =>
   flow([
     listFilesSync,
-    fpMap(fpStringReplace(dir, '')),
+    fpMap(fpStringReplace(dir, '.')),
     fpReduce(requireAllFileReducer(dir), {}),
   ])(dir);
