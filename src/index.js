@@ -1,3 +1,4 @@
+const path = require('path');
 const requireAll = require('./lib/require-all');
 
-module.exports = requireAll('./src/src');
+module.exports = requireAll(path.resolve(__dirname, './src'));
