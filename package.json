@@ -1,12 +1,12 @@
 {
   "name": "@0ti.me/tiny-pfp",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "A tiny, minimalist lodash alternative library",
   "license": "GPL-3.0",
   "main": "src/index.js",
   "scripts": {
-    "generate-lib-index-js": "generate-index --directory=./src/lib --outputFilePath=./src/src/lib/index.js --overwrite=true",
-    "generate-src-index-js": "generate-index --directory=./src/src --outputFilePath=./src/index.js --overwrite=true",
+    "generate-lib-index-js": "yarn generate-index --directory=./src/lib --outputFilePath=./src/src/lib/index.js --overwrite=true",
+    "generate-src-index-js": "yarn generate-index --directory=./src/src --outputFilePath=./src/index.js --overwrite=true",
     "generate-indices": "yarn generate-lib-index-js && yarn generate-src-index-js",
     "lint": "eslint .",
     "prepublish": "yarn generate-indices",
@@ -17,8 +17,10 @@
     "test:integration": "export NODE_ENV=integration && nyc mocha && nyc check-coverage",
     "test:unit": "NODE_ENV=unit nyc mocha"
   },
+  "dependencies": {
+    "@0ti.me/index-generator": "^0.1.5"
+  },
   "devDependencies": {
-    "@0ti.me/index-generator": "^0.1.5",
     "@0ti.me/test-deps": "^0.1.13",
     "bluebird": "^3.7.1",
     "coveralls": "^3.0.7",
