@@ -18,7 +18,7 @@
     "test:unit": "NODE_ENV=unit nyc mocha"
   },
   "devDependencies": {
-    "@0ti.me/index-generator": "^0.1.5",
+    "@0ti.me/index-generator": "^0.1.6",
     "@0ti.me/test-deps": "^0.1.13",
     "bluebird": "^3.7.1",
     "coveralls": "^3.0.7",
