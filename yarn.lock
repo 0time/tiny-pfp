@@ -2,6 +2,15 @@
 # yarn lockfile v1
 
 
+"@0ti.me/index-generator@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@0ti.me/index-generator/-/index-generator-0.1.2.tgz#70097b81d324ed111ec5958e27058e65d0c5f15f"
+  integrity sha512-2Ayf+RR2Q6eVKIP8xm9ag2+adf3Pht5N+TCDEJXevRp3o1OuJsr819aSZMsIkBTuHkLFDESAlyZeCPnMDmoHSg==
+  dependencies:
+    "@0ti.me/tiny-pfp" "^0.1.6"
+    minimist "^1.2.5"
+    prettier "^2.0.5"
+
 "@0ti.me/test-deps@^0.1.13":
   version "0.1.13"
   resolved "https://registry.yarnpkg.com/@0ti.me/test-deps/-/test-deps-0.1.13.tgz#be9406565be3878aacc78f6a42ac01d505bf375b"
@@ -24,6 +33,11 @@
     sinon-as-promised "^4.0.3"
     sinon-chai "^3.5.0"
     uuid "^3.3.3"
+
+"@0ti.me/tiny-pfp@^0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@0ti.me/tiny-pfp/-/tiny-pfp-0.1.6.tgz#5c808e6fc55555fdf168233ce4c18bd6e06835ed"
+  integrity sha512-vyOeMXsv4yhNxHdla9f3OLa3cRVcAp98Ve1YVZd7oJL+y+w3gx/xIfdPvbpV0ZtL/8dRFdzSB3LRXkydW6PjXg==
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.5.5":
   version "7.5.5"
@@ -1335,6 +1349,11 @@ indent-string@^4.0.0:
   resolved "https://registry.yarnpkg.com/indent-string/-/indent-string-4.0.0.tgz#624f8f4497d619b2d9768531d58f4122854d7251"
   integrity sha512-EdDDZu4A2OyIK7Lr/2zG+w5jmbuk1DVBnEwREQvBzspBJkCEbRa8GxU1lghYcaGJCnRWibjDXlq779X1/y5xwg==
 
+index-generator@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/index-generator/-/index-generator-1.0.3.tgz#812a3201d3ca5b8ca1704f1087ee1f4710b20c8d"
+  integrity sha512-mA7E0rbHYqUg8tY/EFfqar+9MpxWosZmXb1l5t1i3Exx67MDE7/mklrEycyFY9ReR+z7mzHxNunmyM1te5lPEA==
+
 inflight@^1.0.4:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/inflight/-/inflight-1.0.6.tgz#49bd6331d7d02d0c09bc910a1075ba8165b56df9"
@@ -2282,6 +2301,11 @@ prettier@^1.18.2:
   version "1.18.2"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.18.2.tgz#6823e7c5900017b4bd3acf46fe9ac4b4d7bda9ea"
   integrity sha512-OeHeMc0JhFE9idD4ZdtNibzY0+TPHSpSSb9h8FqtP+YnoZZ1sl8Vc9b1sasjfymH3SonAF4QcA2+mzHPhMvIiw==
+
+prettier@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.0.5.tgz#d6d56282455243f2f92cc1716692c08aa31522d4"
+  integrity sha512-7PtVymN48hGcO4fGjybyBSIWDsLU4H4XlvOHfq91pz9kkGlonzwTfYkaIEwiRg/dAJF9YlbsduBAgtYLi+8cFg==
 
 progress@^2.0.0:
   version "2.0.3"

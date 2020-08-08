@@ -5,7 +5,10 @@
   "license": "GPL-3.0",
   "main": "src/index.js",
   "scripts": {
+    "generate-lib-index-js": "generate-index --directory=./src/lib --outputFilePath=./src/src/lib/index.js --overwrite=true",
+    "generate-src-index-js": "generate-index --directory=./src/src --outputFilePath=./src/index.js --overwrite=true",
     "lint": "eslint .",
+    "prepublish": "yarn generate-lib-index-js && yarn generate-src-index-js",
     "run-coveralls": "NODE_ENV=unit nyc report --reporter=text-lcov | coveralls",
     "test": "yarn lint && yarn test:unit && yarn test:coveralls && yarn test:integration",
     "test:coveralls": "if-env-run CI yarn run-coveralls",
@@ -19,6 +22,7 @@
     "eslint": "^6.5.1",
     "eslint-config-prettier": "^6.4.0",
     "eslint-plugin-prettier": "^3.1.1",
+    "index-generator": "^1.0.3",
     "lint-staged": "^9.4.2",
     "lodash": "^4.17.15",
     "mocha": "^6.2.1",
@@ -28,5 +32,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "@0ti.me/index-generator": "^0.1.2"
   }
 }
