@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@0ti.me/index-generator@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@0ti.me/index-generator/-/index-generator-0.1.2.tgz#70097b81d324ed111ec5958e27058e65d0c5f15f"
-  integrity sha512-2Ayf+RR2Q6eVKIP8xm9ag2+adf3Pht5N+TCDEJXevRp3o1OuJsr819aSZMsIkBTuHkLFDESAlyZeCPnMDmoHSg==
+"@0ti.me/index-generator@^0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@0ti.me/index-generator/-/index-generator-0.1.5.tgz#0992b3b83f934dc18869e5c0b80ef7372955087b"
+  integrity sha512-MCmmlJvqAXuYLFR43VKbHP6y12015r2Ee100goPrC8aUwldxNE5l3EDnX3p8ZcwrRamu3rrFXOPjsKLbVP5VEA==
   dependencies:
     "@0ti.me/tiny-pfp" "^0.1.6"
     minimist "^1.2.5"
