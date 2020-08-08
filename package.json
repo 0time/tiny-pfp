@@ -9,7 +9,7 @@
     "generate-src-index-js": "yarn generate-index --directory=./src/src --outputFilePath=./src/index.js --overwrite=true",
     "generate-indices": "yarn generate-lib-index-js && yarn generate-src-index-js",
     "lint": "eslint .",
-    "prepublish": "yarn generate-indices",
+    "prepare": "yarn generate-indices",
     "pretest": "yarn generate-indices",
     "run-coveralls": "NODE_ENV=unit nyc report --reporter=text-lcov | coveralls",
     "test": "yarn lint && yarn test:unit && yarn test:coveralls && yarn test:integration",
@@ -17,10 +17,8 @@
     "test:integration": "export NODE_ENV=integration && nyc mocha && nyc check-coverage",
     "test:unit": "NODE_ENV=unit nyc mocha"
   },
-  "dependencies": {
-    "@0ti.me/index-generator": "^0.1.5"
-  },
   "devDependencies": {
+    "@0ti.me/index-generator": "^0.1.5",
     "@0ti.me/test-deps": "^0.1.13",
     "bluebird": "^3.7.1",
     "coveralls": "^3.0.7",
