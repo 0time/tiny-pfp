@@ -1,4 +1,14 @@
-const camelCase = require('../camel-case');
+const camelCase = require('./camel-case');
 
-module.exports = str =>
-  camelCase(str.replace(/\.js$/, '').replace(/^[./]*/, '')).replace(/\//g, '.');
+const regexAllForwardSlashes = /^[./]*/;
+const regexAllPeriods = /\//g;
+const regexJsExtension = /\.js$/;
+
+module.exports = (str) =>
+  camelCase(
+    str.replace(regexJsExtension, '').replace(regexAllForwardSlashes, ''),
+  ).replace(regexAllPeriods, '.');
+
+module.exports.regexAllForwardSlashes = regexAllForwardSlashes;
+module.exports.regexAllPeriods = regexAllPeriods;
+module.exports.regexJsExtension = regexJsExtension;

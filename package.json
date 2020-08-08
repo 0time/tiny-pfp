@@ -1,11 +1,16 @@
 {
   "name": "@0ti.me/tiny-pfp",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "A tiny, minimalist lodash alternative library",
   "license": "GPL-3.0",
   "main": "src/index.js",
   "scripts": {
+    "generate-lib-index-js": "generate-index --directory=./src/lib --outputFilePath=./src/src/lib/index.js --overwrite=true",
+    "generate-src-index-js": "generate-index --directory=./src/src --outputFilePath=./src/index.js --overwrite=true",
+    "generate-indices": "yarn generate-lib-index-js && yarn generate-src-index-js",
     "lint": "eslint .",
+    "prepublish": "yarn generate-indices",
+    "pretest": "yarn generate-indices",
     "run-coveralls": "NODE_ENV=unit nyc report --reporter=text-lcov | coveralls",
     "test": "yarn lint && yarn test:unit && yarn test:coveralls && yarn test:integration",
     "test:coveralls": "if-env-run CI yarn run-coveralls",
@@ -13,12 +18,14 @@
     "test:unit": "NODE_ENV=unit nyc mocha"
   },
   "devDependencies": {
+    "@0ti.me/index-generator": "^0.1.5",
     "@0ti.me/test-deps": "^0.1.13",
     "bluebird": "^3.7.1",
     "coveralls": "^3.0.7",
     "eslint": "^6.5.1",
     "eslint-config-prettier": "^6.4.0",
     "eslint-plugin-prettier": "^3.1.1",
+    "index-generator": "^1.0.3",
     "lint-staged": "^9.4.2",
     "lodash": "^4.17.15",
     "mocha": "^6.2.1",
