@@ -3,13 +3,16 @@ module.exports = (obj, bigKey, defaultValue = undefined) => {
     throw TypeError('The obj parameter was not a valid type');
   }
 
+  let curr = obj;
+
   if (!(bigKey instanceof String || typeof bigKey === 'string')) {
-    return obj[bigKey];
+    curr = obj[bigKey];
+
+    return curr === undefined ? defaultValue : curr;
   }
 
   const keys = bigKey.split('.');
 
-  let curr = obj;
   let key = null;
 
   for (let i = 0; i < keys.length; ++i) {
