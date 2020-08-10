@@ -1,9 +1,7 @@
 const zip = require('./zip');
 
-const mapValues = (obj, fn) => {
+module.exports = (obj, fn) => {
   const keys = Object.keys(obj);
 
-  return keys.map(key => fn(obj[key], key)).reduce(zip(keys), {});
+  return keys.map(key => fn(obj[key], key, obj)).reduce(zip(keys), {});
 };
-
-module.exports = mapValues;
