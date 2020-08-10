@@ -1,15 +1,14 @@
 const {
   d,
   expect,
+  proxyquire,
   sinon: { stub },
   tquire,
 } = deps;
 
-const proxyquire = require('proxyquire')
-  .noPreserveCache()
-  .noCallThru();
+const me = __filename;
 
-d(__filename, () => {
+d(me, () => {
   const mocks = {};
 
   const modifiedFnSymbol = Symbol();
@@ -21,9 +20,8 @@ d(__filename, () => {
   mocks['../../lib/reduce'] = reduce;
 
   it('should modify the base reduce function with the fixed arity 3 function', () => {
-    const fpSet = proxyquire(tquire(__filename, false), mocks);
+    expect(proxyquire(tquire(me, false), mocks)).to.equal(modifiedFnSymbol);
 
     expect(fixedArity3Fn).to.have.been.calledOnceWithExactly(reduce);
-    expect(fpSet).to.equal(modifiedFnSymbol);
   });
 });

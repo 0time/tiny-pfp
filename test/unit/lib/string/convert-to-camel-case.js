@@ -1,7 +1,7 @@
-const proxyquire = require('proxyquire').noPreserveCache().noCallThru();
 const {
   d,
   expect,
+  proxyquire,
   sinon: { stub },
   tquire,
 } = deps;
