@@ -1,18 +1,21 @@
+const clone = require('./clone');
 const flow = require('../src/fp/flow');
 const get = require('./get');
-const fpIncludes = require('../src/fp/includes');
 const negate = require('./negate');
 const reduce = require('../src/fp/reduce');
 const set = require('./set');
 const unset = require('./unset');
 
-const fpExcludes = ray => negate(fpIncludes(ray));
+const fpExcludes = ray => negate(val => ray.includes(val));
+
+const MAX_ITERATIONS = 250;
 
 // TODO: Make this work for deep keys in an omitSet
 
 module.exports = (obj, omitSet) => {
   let allKeys = [];
   let curr = obj;
+  let i = 0;
   let keys = [];
   let key = null;
   let newKeys = [];
@@ -20,23 +23,28 @@ module.exports = (obj, omitSet) => {
 
   // eslint-disable-next-line no-constant-condition
   while (true) {
-    objKeys = Object.keys(curr);
+    ++i;
 
-    newKeys = objKeys
-      .map(ea => (key === null ? ea : `${key}.${ea}`))
-      .filter(fpExcludes(omitSet));
+    if (!(['string'].includes(typeof curr) || curr instanceof String)) {
+      objKeys = Object.keys(curr);
 
-    keys = keys.concat(newKeys);
+      newKeys = objKeys
+        .map(ea => (key === null ? ea : `${key}.${ea}`))
+        .filter(fpExcludes(omitSet));
 
-    allKeys = allKeys.concat(newKeys);
+      keys = keys.concat(newKeys);
 
-    console.error({
-      allKeys,
-      curr,
-      key,
-      newKeys,
-      objKeys,
-    });
+      allKeys = allKeys.concat(newKeys);
+    }
+
+    if (i > MAX_ITERATIONS) {
+      // infinite loop protection?
+      // should I use a hash map of memory locations if possible?
+      // otherwise, what's a better way to do this?
+      throw new Error(
+        `iteration overrun ${i} > ${MAX_ITERATIONS} (i > MAX_ITERATIONS)`,
+      );
+    }
 
     if (keys.length === 0) {
       break;
@@ -47,15 +55,9 @@ module.exports = (obj, omitSet) => {
   }
 
   allKeys = allKeys.sort((a, b) => (a < b ? 1 : -1));
-  console.error({ allKeys });
 
   return flow([
-    reduce((acc, ea) => console.error(acc) || set(acc, ea, get(obj, ea)), {}),
+    reduce((acc, ea) => set(acc, ea, clone(get(obj, ea))), {}),
     initialAcc => omitSet.reduce((acc, ea) => unset(acc, ea), initialAcc),
   ])(allKeys);
 };
-/*
-  Object.keys(obj)
-    .filter(each => !omitSet.includes(each))
-    .reduce((acc, key) => set(acc, key, get(obj, key)), {});
-    */
