@@ -1,6 +1,6 @@
 const { d, expect, tquire, uuid } = deps;
 
-const set = tquire(__filename);
+const unset = tquire(__filename);
 
 d(__filename, () => {
   const val = Symbol();
@@ -16,7 +16,7 @@ d(__filename, () => {
       });
 
       it('should throw a TypeError', () =>
-        expect(() => set(obj, key, val)).to.throw(TypeError));
+        expect(() => unset(obj, key)).to.throw(TypeError));
     });
 
     describe('given a valid obj reference', () => {
@@ -24,22 +24,16 @@ d(__filename, () => {
         obj = {};
       });
 
-      it('should set the value to the obj', () => {
-        set(obj, key, val);
-
-        expect(obj).to.have.property(key, val);
-      });
+      it('should change nothing', () =>
+        expect(unset(obj, key)).to.deep.equal({}));
 
       describe('given the key is already set', () => {
         beforeEach(() => {
           obj = { [key]: Symbol() };
         });
 
-        it('should overwrite the value', () => {
-          set(obj, key, val);
-
-          expect(obj).to.have.property(key, val);
-        });
+        it('should delete the value', () =>
+          expect(unset(obj, key)).to.deep.equal({}));
       });
     });
   });
@@ -53,7 +47,7 @@ d(__filename, () => {
       });
 
       it('should throw a TypeError', () =>
-        expect(() => set(obj, key, val)).to.throw(TypeError));
+        expect(() => unset(obj, key)).to.throw(TypeError));
     });
 
     describe('given a valid obj reference', () => {
@@ -61,22 +55,16 @@ d(__filename, () => {
         obj = {};
       });
 
-      it('should set the value to the obj', () => {
-        set(obj, key, val);
+      it('should not change the obj', () =>
+        expect(unset(obj, key)).to.deep.equal({}));
 
-        expect(obj).to.have.property(key, val);
-      });
-
-      describe('given the key is already set', () => {
+      describe('given the key is already unset', () => {
         beforeEach(() => {
           obj = { [key]: Symbol() };
         });
 
-        it('should overwrite the value', () => {
-          set(obj, key, val);
-
-          expect(obj).to.have.property(key, val);
-        });
+        it('should delete the value', () =>
+          expect(unset(obj, key)).to.deep.equal({}));
       });
     });
   });
@@ -100,29 +88,20 @@ d(__filename, () => {
       });
 
       it('should throw a TypeError', () =>
-        expect(() => set(obj, key, val)).to.throw(TypeError));
+        expect(() => unset(obj, key)).to.throw(TypeError));
 
       describe('given a valid obj reference', () => {
         beforeEach(() => {
           obj = {};
         });
 
-        it('should set the nested value to the obj', () => {
-          set(obj, key, val);
-
-          expect(obj).to.have.nested.property(key, val);
-        });
-
-        describe('given one key is set', () => {
+        describe('given one key is not set', () => {
           beforeEach(() => {
             obj = { [key1]: {} };
           });
 
-          it('should write the value', () => {
-            set(obj, key, val);
-
-            expect(obj).to.have.nested.property(key, val);
-          });
+          it('should change nothing', () =>
+            expect(unset(obj, key)).to.deep.equal({ [key1]: {} }));
         });
 
         describe('given the key is not set', () => {
@@ -130,11 +109,8 @@ d(__filename, () => {
             obj = {};
           });
 
-          it('should write the value', () => {
-            set(obj, key, val);
-
-            expect(obj).to.have.nested.property(key, val);
-          });
+          it('should return the obj', () =>
+            expect(unset(obj, key)).to.deep.equal({}));
         });
 
         describe('given the key is already set', () => {
@@ -142,10 +118,10 @@ d(__filename, () => {
             obj = { [key]: Symbol() };
           });
 
-          it('should overwrite the value', () => {
-            set(obj, key, val);
+          it('should delete the value', () => {
+            unset(obj, key);
 
-            expect(obj).to.have.nested.property(key, val);
+            expect(obj).to.not.have.nested.property(key, val);
           });
         });
       });
@@ -165,15 +141,15 @@ d(__filename, () => {
       let obj = null;
 
       beforeEach(() => {
-        obj = {};
+        obj = { [key1]: { [key1]: { [key1]: val } } };
       });
 
       it('should not throw', () =>
-        expect(() => set(obj, key, val)).to.not.throw());
+        expect(() => unset(obj, key)).to.not.throw());
 
-      it('should return the object with that key set to the value', () =>
-        expect(set(obj, key, val)).to.deep.equal({
-          [key1]: { [key1]: { [key1]: val } },
+      it('should return the object with that key unset', () =>
+        expect(unset(obj, key)).to.deep.equal({
+          [key1]: { [key1]: {} },
         }));
     });
   });

@@ -12,7 +12,7 @@ d(__filename, () => {
   describe('given a non-string key', () => {
     const key = Symbol();
 
-    describe('given an empty obj reference', () => {
+    describe('given an null obj reference', () => {
       beforeEach(() => {
         obj = null;
       });

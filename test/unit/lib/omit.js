@@ -49,11 +49,23 @@ d(me, () => {
   });
 
   describe('nested keys', () => {
-    // To be implemented
-    it.skip('should omit nested keys', () =>
+    it('should omit nested keys', () =>
       expect(omit({ a: { b: 1, c: 2 }, d: 3 }, ['a.c'])).to.deep.equal({
         a: { b: 1 },
         d: 3,
+      }));
+
+    it('should be able to erase all nested keys but keep the root key', () =>
+      expect(omit({ a: { b: 1, c: 2 }, d: 3 }, ['a.c', 'a.b'])).to.deep.equal({
+        a: {},
+        d: 3,
+      }));
+
+    it('should erase a key with multiple child properties', () =>
+      expect(
+        omit({ a: { b: { c: 1, d: 2 }, d: 3 }, e: 4 }, ['a']),
+      ).to.deep.equal({
+        e: 4,
       }));
   });
 });
