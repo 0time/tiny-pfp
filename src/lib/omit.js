@@ -1,6 +1,7 @@
 const clone = require('./clone');
 const flow = require('../src/fp/flow');
 const get = require('./get');
+const isString = require('./is-string');
 const negate = require('./negate');
 const reduce = require('../src/fp/reduce');
 const set = require('./set');
@@ -9,8 +10,6 @@ const unset = require('./unset');
 const fpExcludes = ray => negate(val => ray.includes(val));
 
 const MAX_ITERATIONS = 250;
-
-// TODO: Make this work for deep keys in an omitSet
 
 module.exports = (obj, omitSet) => {
   let allKeys = [];
@@ -25,7 +24,7 @@ module.exports = (obj, omitSet) => {
   while (true) {
     ++i;
 
-    if (!(['string'].includes(typeof curr) || curr instanceof String)) {
+    if (!isString(curr)) {
       objKeys = Object.keys(curr);
 
       newKeys = objKeys

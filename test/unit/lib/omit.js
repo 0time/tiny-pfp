@@ -1,4 +1,4 @@
-const { d, expect, tquire } = deps;
+const { d, expect, tquire, uuid } = deps;
 
 const me = __filename;
 
@@ -6,6 +6,32 @@ d(me, () => {
   const omit = tquire(me);
 
   let obj = {};
+
+  describe('value special cases', () => {
+    describe('string value', () => {
+      let stringKey = null;
+      let stringValue = null;
+
+      beforeEach(() => {
+        stringKey = `string-key-${uuid()}`;
+        stringValue = `string-value-${uuid()}`;
+
+        obj = { [stringKey]: stringValue };
+      });
+
+      it('should be omittable', () =>
+        expect(omit(obj, [stringKey])).to.deep.equal({}));
+
+      it('should stick around if not omitted', () =>
+        expect(omit(obj, [])).to.deep.equal({ [stringKey]: stringValue }));
+
+      it('should leave obj unchanged', () => {
+        omit(obj, [stringKey]);
+
+        expect(obj).to.deep.equal({ [stringKey]: stringValue });
+      });
+    });
+  });
 
   describe('shallow string keys', () => {
     beforeEach(() => {
@@ -67,5 +93,16 @@ d(me, () => {
       ).to.deep.equal({
         e: 4,
       }));
+  });
+
+  describe('given a self-referential object', () => {
+    let obj = null;
+
+    beforeEach(() => {
+      obj = {};
+      obj.obj = obj;
+    });
+
+    it('should throw an error', () => expect(() => omit(obj, [])).to.throw());
   });
 });

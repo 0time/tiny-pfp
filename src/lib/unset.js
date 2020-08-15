@@ -1,5 +1,7 @@
+const isString = require('./is-string');
+
 module.exports = (obj, bigKey) => {
-  if (!(bigKey instanceof String || typeof bigKey === 'string')) {
+  if (!isString(bigKey)) {
     delete obj[bigKey];
 
     return obj;

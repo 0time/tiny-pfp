@@ -1,3 +1,5 @@
+const isString = require('./is-string');
+
 module.exports = (obj, bigKey, defaultValue = undefined) => {
   if (!obj) {
     throw TypeError('The obj parameter was not a valid type');
@@ -5,7 +7,7 @@ module.exports = (obj, bigKey, defaultValue = undefined) => {
 
   let curr = obj;
 
-  if (!(bigKey instanceof String || typeof bigKey === 'string')) {
+  if (!isString(bigKey)) {
     curr = obj[bigKey];
 
     return curr === undefined ? defaultValue : curr;
