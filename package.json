@@ -1,6 +1,6 @@
 {
   "name": "@0ti.me/tiny-pfp",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "A tiny, minimalist lodash alternative library",
   "license": "GPL-3.0",
   "main": "src/index.js",
@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@0ti.me/index-generator": "^0.1.6",
-    "@0ti.me/test-deps": "^0.1.13",
+    "@0ti.me/test-deps": "0.1.19",
     "bluebird": "^3.7.1",
     "coveralls": "^3.0.7",
     "eslint": "^6.5.1",

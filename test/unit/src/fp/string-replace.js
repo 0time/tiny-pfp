@@ -1,15 +1,13 @@
 const {
   d,
   expect,
+  pquire,
   sinon: { stub },
-  tquire,
 } = deps;
 
-const proxyquire = require('proxyquire')
-  .noPreserveCache()
-  .noCallThru();
+const me = __filename;
 
-d(__filename, () => {
+d(me, () => {
   const mocks = {};
 
   const modifiedFnSymbol = Symbol();
@@ -21,9 +19,8 @@ d(__filename, () => {
   mocks['../../lib/string/replace'] = stringReplace;
 
   it('should modify the base stringReplace function with the fixed arity 3 function', () => {
-    const fpSet = proxyquire(tquire(__filename, false), mocks);
+    expect(pquire(me, mocks)).to.equal(modifiedFnSymbol);
 
     expect(fixedArity3Fn).to.have.been.calledOnceWithExactly(stringReplace);
-    expect(fpSet).to.equal(modifiedFnSymbol);
   });
 });

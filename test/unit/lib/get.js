@@ -3,6 +3,7 @@ const { d, expect, tquire, uuid } = deps;
 const get = tquire(__filename);
 
 d(__filename, () => {
+  const ABSENT_SYMBOL = Symbol();
   const defaultValue = Symbol();
   const val = Symbol();
 
@@ -11,7 +12,7 @@ d(__filename, () => {
   describe('given a non-string key', () => {
     const key = Symbol();
 
-    describe('given an empty obj reference', () => {
+    describe('given an null obj reference', () => {
       beforeEach(() => {
         obj = null;
       });
@@ -27,6 +28,9 @@ d(__filename, () => {
 
       it('should get the value from the obj', () =>
         expect(get(obj, key)).to.have.equal(val));
+
+      it('should return the default value if the value is absent from the reference', () =>
+        expect(get(obj, Symbol(), ABSENT_SYMBOL)).to.equal(ABSENT_SYMBOL));
     });
   });
 

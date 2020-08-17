@@ -1,15 +1,13 @@
 const {
   d,
   expect,
+  pquire,
   sinon: { stub },
-  tquire,
 } = deps;
 
-const proxyquire = require('proxyquire')
-  .noPreserveCache()
-  .noCallThru();
+const me = __filename;
 
-d(__filename, () => {
+d(me, () => {
   const mocks = {};
 
   const modifiedFnSymbol = Symbol();
@@ -21,9 +19,8 @@ d(__filename, () => {
   mocks['../../lib/get'] = get;
 
   it('should modify the base get function with the fixed arity 2 function', () => {
-    const fpGet = proxyquire(tquire(__filename, false), mocks);
+    expect(pquire(me, mocks)).to.equal(modifiedFnSymbol);
 
     expect(fixedArity2Fn).to.have.been.calledOnceWithExactly(get);
-    expect(fpGet).to.equal(modifiedFnSymbol);
   });
 });
