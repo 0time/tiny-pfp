@@ -1,9 +1,8 @@
 const {
   d,
   expect,
-  proxyquire,
+  pquire,
   sinon: { stub },
-  tquire,
 } = deps;
 
 const me = __filename;
@@ -20,7 +19,7 @@ d(me, () => {
   mocks['../../lib/map'] = map;
 
   it('should modify the base map function with the fixed arity 2 function', () => {
-    expect(proxyquire(tquire(me, false), mocks)).to.equal(modifiedFnSymbol);
+    expect(pquire(me, mocks)).to.equal(modifiedFnSymbol);
 
     expect(fixedArity2Fn).to.have.been.calledOnceWithExactly(map);
   });
