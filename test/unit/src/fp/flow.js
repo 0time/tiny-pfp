@@ -23,4 +23,7 @@ d(me, () => {
 
   it('should call reduce on the functions using chainIfThennable and defaulting to the second arg', () =>
     expect(flow(fns)(valSymbol)).to.equal(reduceResult));
+
+  it('should not error if the input is undefined or otherwise properties cannot be read on it', () =>
+    expect(() => flow([() => ({})])()).to.not.throw());
 });

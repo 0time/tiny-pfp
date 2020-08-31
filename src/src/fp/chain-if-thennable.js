@@ -1,1 +1,2 @@
-module.exports = (input, fn) => (input.then ? input.then(fn) : fn(input));
+module.exports = (input, fn) =>
+  input && input.then ? input.then(fn) : fn(input);
