@@ -64,18 +64,25 @@ d(me, () => {
     }),
   );
 
-  describe('non-fp only tests', () => {
+  describe('non-fp only tests', () =>
+    [null, undefined]
+      .map(a => ({ a }))
+      .map(obj => runTest(obj, 'a.b', nextInt())));
+
+  describe('fp only tests', () =>
     [true, false, null, undefined, 0, NaN, '', 'a-string']
       .map(a => ({ a }))
-      .map(obj => runTest(obj, 'a.b', nextInt()));
-  });
+      .map(obj => runFpTest(obj, 'a.b', nextInt())));
 
   // These are known inconsistencies, you can enable these tests to see the differences
   describe.skip('Inconsistency tests', () => {
-    describe('should be the same as lodash, but lodash/fp.set behaves differently than lodash.set', () => {
-      [true, false, null, undefined, 0, NaN, '', 'a-string']
+    describe('in order to minimize information loss, I have diverged from lodash a bit on these', () =>
+      [true, false, 0, NaN, '', 'a-string']
         .map(a => ({ a }))
-        .map(obj => runFpTest(obj, 'a.b', nextInt()));
-    });
+        .map(obj => runTest(obj, 'a.b', nextInt())));
+
+    describe('should be the same as lodash, but lodash/fp.set behaves differently than lodash.set', () =>
+      // Parity appears to be achieved with lodash/fp.set now, so this array is empty...
+      [].map(a => ({ a })).map(obj => runFpTest(obj, 'a.b', nextInt())));
   });
 });
