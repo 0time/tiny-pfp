@@ -1,3 +1,5 @@
+const set = require('../../../src/lib/set');
+
 const { d, expect, tquire, uuid } = deps;
 
 const me = __filename;
@@ -8,12 +10,16 @@ d(me, () => {
   let obj = {};
 
   describe('value special cases', () => {
+    let stringKey = null;
+
+    beforeEach(() => {
+      stringKey = `string-key-${uuid()}`;
+    });
+
     describe('string value', () => {
-      let stringKey = null;
       let stringValue = null;
 
       beforeEach(() => {
-        stringKey = `string-key-${uuid()}`;
         stringValue = `string-value-${uuid()}`;
 
         obj = { [stringKey]: stringValue };
@@ -29,6 +35,53 @@ d(me, () => {
         omit(obj, [stringKey]);
 
         expect(obj).to.deep.equal({ [stringKey]: stringValue });
+      });
+    });
+
+    describe('array value', () => {
+      let arrayValue = null;
+
+      beforeEach(() => {
+        arrayValue = [uuid(), uuid()];
+
+        obj = { [stringKey]: arrayValue };
+      });
+
+      it('should be omittable', () =>
+        expect(omit(obj, [stringKey])).to.deep.equal({}));
+
+      // TODO: Fix me, major bug
+      it('should stick around if not omitted', () =>
+        expect(
+          omit(set(obj, 'some-other-key', 1), ['some-other-key']),
+        ).to.deep.equal({ [stringKey]: arrayValue }));
+
+      it('should leave obj unchanged', () => {
+        omit(obj, [stringKey]);
+
+        expect(obj).to.deep.equal({ [stringKey]: arrayValue });
+      });
+    });
+
+    describe('number value', () => {
+      let numberValue = null;
+
+      beforeEach(() => {
+        numberValue = 7;
+
+        obj = { [stringKey]: numberValue };
+      });
+
+      it('should be omittable', () =>
+        expect(omit(obj, [stringKey])).to.deep.equal({}));
+
+      it('should stick around if not omitted', () =>
+        expect(omit(obj, [])).to.deep.equal({ [stringKey]: numberValue }));
+
+      it('should leave obj unchanged', () => {
+        omit(obj, [stringKey]);
+
+        expect(obj).to.deep.equal({ [stringKey]: numberValue });
       });
     });
   });

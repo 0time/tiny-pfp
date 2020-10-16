@@ -1,22 +1,34 @@
 const { d, testRunner, tquire, uuid } = deps;
 
-const isString = tquire(__filename);
+const isUndefined = tquire(__filename);
 
 d(__filename, () => {
-  ['', `a-string-${uuid()}`, new String(`new String('${uuid()}')`)]
+  [undefined]
     .map(input => ({
       description: `should return true for valid string input ${input}`,
       expected: true,
-      functionToTest: isString,
+      functionToTest: isUndefined,
       input,
     }))
     .forEach(testRunner);
 
-  [null, undefined, 0, true, false, {}, new Object(), [], new Array()]
+  [
+    `a-string-${uuid()}`,
+    new String(`new String('${uuid()}')`),
+    '',
+    null,
+    0,
+    true,
+    false,
+    {},
+    new Object(),
+    [],
+    new Array(),
+  ]
     .map(input => ({
       description: `should return false for non-string input ${input}`,
       expected: false,
-      functionToTest: isString,
+      functionToTest: isUndefined,
       input,
     }))
     .forEach(testRunner);
