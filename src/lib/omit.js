@@ -12,16 +12,23 @@ const fpExcludes = ray => negate(val => ray.includes(val));
 const MAX_ITERATIONS = 250;
 
 module.exports = (obj, omitSet) => {
-  let allKeys = [];
+  let accKeys = [];
   let curr = obj;
   let i = 0;
+  let first = true;
   let keys = [];
   let key = null;
   let newKeys = [];
   let objKeys = [];
 
-  // eslint-disable-next-line no-constant-condition
-  while (true) {
+  while (first || keys.length > 0) {
+    first = false;
+
+    if (keys.length > 0) {
+      key = keys.pop();
+      curr = get(obj, key);
+    }
+
     ++i;
 
     if (!isString(curr)) {
@@ -33,7 +40,7 @@ module.exports = (obj, omitSet) => {
 
       keys = keys.concat(newKeys);
 
-      allKeys = allKeys.concat(newKeys);
+      accKeys = accKeys.concat(newKeys);
     }
 
     if (i > MAX_ITERATIONS) {
@@ -44,19 +51,12 @@ module.exports = (obj, omitSet) => {
         `iteration overrun ${i} > ${MAX_ITERATIONS} (i > MAX_ITERATIONS)`,
       );
     }
-
-    if (keys.length === 0) {
-      break;
-    }
-
-    key = keys.pop();
-    curr = get(obj, key);
   }
 
-  allKeys = allKeys.sort((a, b) => (a < b ? 1 : -1));
+  accKeys = accKeys.sort((a, b) => (a < b ? 1 : -1));
 
   return flow([
     reduce((acc, ea) => set(acc, ea, clone(get(obj, ea))), {}),
     initialAcc => omitSet.reduce((acc, ea) => unset(acc, ea), initialAcc),
-  ])(allKeys);
+  ])(accKeys);
 };
