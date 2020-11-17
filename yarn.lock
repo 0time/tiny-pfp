@@ -7,11 +7,12 @@
   resolved "https://registry.yarnpkg.com/@0ti.me/en-path/-/en-path-0.1.0.tgz#410504d6b47a07573ffe94ac8a2666c8d5fd053c"
   integrity sha512-lde72ajBq/CN3eXiztuP4vsFgMzfLk8HRhnqdzbTiY5yjQiisaC2CC0a/vfdSms2ZsAxiz94GeAijktI4t+KPw==
 
-"@0ti.me/index-generator@^0.1.6":
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/@0ti.me/index-generator/-/index-generator-0.1.6.tgz#b72c4fe0f0be78fa3bbebf65e3a439b89ebb1ede"
-  integrity sha512-PdP6pLTCGyGjL6SjjphrZRGYVeXpJPX2PRH2odzEwKfKko5JKWz665W6oCcPQ0ODDr9KbUc4LJNp3yM5Pj3jEg==
+"@0ti.me/index-generator@0.1.9":
+  version "0.1.9"
+  resolved "https://registry.yarnpkg.com/@0ti.me/index-generator/-/index-generator-0.1.9.tgz#ebb04c8dfd76303b37935d1eb390ba1f4b638503"
+  integrity sha512-blM62Frzc1MqGOCasx8Tc0n3LPetSCxmO1PKZGvnt5L1IUQPPU1pFcDy2NYSM/gju+WaAI8cw4A733ks61koeQ==
   dependencies:
+    "@0ti.me/en-path" "^0.1.0"
     "@0ti.me/tiny-pfp" "^0.1.10"
     minimist "^1.2.5"
     prettier "^2.0.5"
